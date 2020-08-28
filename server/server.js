@@ -1,14 +1,11 @@
-const express = require("express");
-const cors = require("cors");
-const cityRouter = require("./cities.js");
+const express = require('express');
+const middlewares = require('./middlewares');
+const routes = require('./routes');
+
 const app = express();
 
-app.use(cors());
+middlewares(app);
+routes(app);
 
-app.use("/cities", cityRouter);
-
-app.get("/", (req, res) => {
-  res.send("test");
-});
-
-app.listen(process.env.PORT || 4242, console.log(`j'ecoute le port 4242`));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`listen port weather ${PORT}`));
