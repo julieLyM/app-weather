@@ -3,36 +3,58 @@ import React, { Component } from 'react';
 import { Results } from './Results';
 import { SearchBar } from './SearchBar';
 
-import { getWeatherByCity } from '../service/data';
+import { getWeatherByCity, getWeatherForFiveDaysByCity } from '../service/data';
 
 export default class City extends Component {
   state = {
     city: '',
     resultCity: null,
+    resultForecast: null,
   };
 
   onChange = ({ target: { value: city } }) => {
     this.setState({ city });
   };
 
-  startSearch = async () => {
+  citySearch = async () => {
     const data = await getWeatherByCity(this.state.city);
     this.setState({ resultCity: data });
   };
 
+  forecastSearch = async () => {
+    const data = await getWeatherForFiveDaysByCity(this.state.city);
+    this.setState({ resultForecast: data });
+  };
+
   onKeyDown = (e) => {
     if (e.key === 'Enter') {
-      this.startSearch();
+      this.citySearch();
     }
   };
 
+  onSearchCity = () => {
+    this.citySearch();
+  };
+
   render() {
-    const { resultCity, city } = this.state;
+    const { resultCity, city, resultForecast } = this.state;
     return (
       <div>
-        <h1>component city home</h1>
-        <SearchBar onKeyDown={this.onKeyDown} onChange={this.onChange} />
-        {resultCity && <Results city={city} resultCity={resultCity} />}
+        <h1 className="title is-1">Weather App</h1>
+        <SearchBar
+          onKeyDown={this.onKeyDown}
+          onChange={this.onChange}
+          citySearch={this.citySearch}
+        />
+
+        {resultCity && (
+          <Results
+            city={city}
+            resultCity={resultCity}
+            resultForecast={resultForecast}
+            forecastSearch={this.forecastSearch}
+          />
+        )}
       </div>
     );
   }

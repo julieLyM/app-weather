@@ -1,3 +1,3 @@
 # app-weather
-App on React / Node (Express)<br>
+App on React (bulma for css integration) / Node (Express)<br>
 API : https://openweathermap.org/
