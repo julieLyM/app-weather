@@ -20,39 +20,57 @@ export const Results = ({
       <div className="tile is-parent">
         <article className="tile is-child notification is-info">
           <p className="title">{name}</p>
-          <div className="content">
+          <div
+            className="content"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              margin: '10px',
+            }}
+          >
             <div>
               {weather.map(({ main, description, icon, dt_txt }) => (
                 <div key={main}>
-                  <div>{moment(dt_txt).format('llll')}</div>
-
+                  <div className="subtitle">
+                    {moment(dt_txt).format('llll')}
+                  </div>
                   <img
                     src={`http://openweathermap.org/img/w/${icon}.png`}
                     alt=""
                   />
-                  <div>{main}</div>
                   <div>{description}</div>
                 </div>
               ))}
             </div>
-            <div>
-              <h2>Temperature</h2>
-              <div>Temp: {temp}°C</div>
-              <div>Feels like : {feels_like}°C</div>
-              <div>
-                Temp min : {temp_min}°C, Temp max : {temp_max}°C
+
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-around',
+                marginTop: '20px',
+                flexWrap: 'wrap',
+              }}
+            >
+              <div style={{ margin: '10px' }}>
+                <h2 className="title is-5">Temperature</h2>
+                <div>Temp: {temp}°C</div>
+                <div>Feels like : {feels_like}°C</div>
+                <p> Temp min : {temp_min}°C </p>
+                <p> Temp max : {temp_max}°C</p>
+                <p>Humidity : {humidity}</p>
               </div>
-              <div>Humidity : {humidity}</div>
-            </div>
-            <div>
-              <h2>Wind</h2>
-              <div>Speed : {speed}</div>
-            </div>
-            <div>
-              <h2>Sun infos</h2>
+
               <div>
-                Sun rises at {moment(sunrise).format('HH:mm:ss')} and downs at{' '}
-                {moment(sunset).format('HH:mm:ss')}
+                <h2 className="title is-5">Wind</h2>
+                <div>Speed : {speed}</div>
+              </div>
+
+              <div>
+                <h2 className="title is-5">Sun infos</h2>
+                <div>
+                  Sun rises at {moment(sunrise).format('HH:mm:ss')} and downs at{' '}
+                  {moment(sunset).format('HH:mm:ss')}
+                </div>
               </div>
             </div>
           </div>

@@ -10,7 +10,9 @@ const Forecast = ({ resultForecast, city }) => {
     <div>
       <p className="title">{name} weather forecast</p>
 
-      <div>
+      <div
+        style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column' }}
+      >
         {list.map(
           ({
             id,
@@ -20,8 +22,16 @@ const Forecast = ({ resultForecast, city }) => {
             dt_txt,
           }) => (
             <div key={id}>
-              <div>
-                <div>{moment(dt_txt).format('llll')}</div>
+              <div
+                style={{
+                  display: 'flex',
+                  border: 'white 2px solid',
+                  justifyContent: 'space-around',
+                  margin: '5px',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <div className="subtitle">{moment(dt_txt).format('llll')}</div>
                 <div>
                   {weather.map(({ main, description, id, icon }) => (
                     <div key={id}>

@@ -46,15 +46,23 @@ export default class City extends Component {
           onChange={this.onChange}
           citySearch={this.citySearch}
         />
-
-        {resultCity && (
-          <Results
-            city={city}
-            resultCity={resultCity}
-            resultForecast={resultForecast}
-            forecastSearch={this.forecastSearch}
-          />
-        )}
+        <div
+          class="container is-fluid is-widescreen"
+          style={{ display: 'flex', justifyContent: 'center' }}
+        >
+          <div style={{ width: '800px' }}>
+            {resultCity && (
+              <div class="notification">
+                <Results
+                  city={city}
+                  resultCity={resultCity}
+                  resultForecast={resultForecast}
+                  forecastSearch={this.forecastSearch}
+                />
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     );
   }
